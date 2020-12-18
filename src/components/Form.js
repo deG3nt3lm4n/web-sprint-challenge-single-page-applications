@@ -1,11 +1,16 @@
 import React from 'react'
 
-function Form({values, change}) {
+function Form({values, change, submit, disabled, err}) {
 
   const onChange = (e) => {
     const { name, value, type, checked } = e.target;
     const valueToUSe = type === "checkbox" ? checked : value;
     change(name, valueToUSe);
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    submit()
   }
 
 
@@ -19,7 +24,7 @@ function Form({values, change}) {
           </div>
         </header>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <h2>Build your own pizza</h2>
 
           {/* name */}
@@ -28,7 +33,7 @@ function Form({values, change}) {
               Name:
               <input type="text" name="name" value={values.name} onChange={onChange}/>
               {/* error message */}
-              <h6></h6>
+              <h6>{err.name}</h6>
             </label>
           </div>
 
@@ -39,9 +44,9 @@ function Form({values, change}) {
               <span>Required</span>
               <select value={values.size} name="size" onChange={onChange}>
                 <option value="">Select</option>
-                <option value="s">small</option>
-                <option value="m">medium</option>
-                <option value="l">large</option>
+                <option value="small">small</option>
+                <option value="medium">medium</option>
+                <option value="large">large</option>
               </select>
             </label>
           </div>
@@ -75,7 +80,7 @@ function Form({values, change}) {
             </label>
           </div>
 
-          <button>Submit</button>
+          <button disabled={disabled}>Submit</button>
 
         </form>
       </div>
