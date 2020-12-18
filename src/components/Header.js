@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Header() {
   return (
-    <header>
+    <header className="main-header">
       <nav>
         <h2>Lambda Eats</h2>
         <ul>
